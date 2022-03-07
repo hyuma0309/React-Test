@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Top from '../components/Top';
-import Spring from '../components/Spring';
+import Spring from '../components/reactSpring/Spring';
 
 
 const MyApp: React.FC = () => {

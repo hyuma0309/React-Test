@@ -1,7 +1,10 @@
-import { animated, useSpring } from "@react-spring/web";
-import React, { VFC, useState } from "react";
+import { useSprings, useSpring, animated, config } from "react-spring";
+import React, { useState, VFC } from "react";
 
 const Spring: VFC = () => {
+  /**
+   *useSpring Hook
+   */
   const [enter, setEnter] = useState(false);
   const springA = useSpring({
     fontSize: enter ? "48pt" : "24pt",
