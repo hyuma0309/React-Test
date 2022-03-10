@@ -1,5 +1,5 @@
-import { useSprings, useSpring, animated, config } from "react-spring";
 import React, { useState, VFC } from "react";
+import { animated, useSpring, to } from "react-spring";
 
 const Spring: VFC = () => {
   /**
@@ -11,10 +11,23 @@ const Spring: VFC = () => {
     color: enter ? "red" : "green",
   });
 
-  const [springB, set] = useSpring(() => ({
+  const [springB, setSpring] = useSpring(() => ({
     fontSize: "24pt",
     color: "green",
   }));
+
+  const [tests, setTest] = useSpring(() => ({
+    loop: { reverse: true },
+    from: { x: 0 },
+    to: { x: 100 },
+    delay: 500,
+    onRest: () => console.log("終わりました"),
+  }));
+
+  const { o, color } = useSpring({
+    o: 10,
+    color: 'green',
+  })
 
   return (
     <>
@@ -27,10 +40,21 @@ const Spring: VFC = () => {
       </animated.div>
       <animated.div
         style={springB}
-        onMouseEnter={(e) => set({ fontSize: "48pt", color: "red" })}
-        onMouseLeave={(e) => set({ fontSize: "24pt", color: "green" })}
+        onMouseEnter={(e) => setSpring({ fontSize: "48pt", color: "red" })}
+        onMouseLeave={(e) => setSpring({ fontSize: "24pt", color: "green" })}
       >
         Hello React Spring
+      </animated.div>
+      <animated.div
+        style={{
+          fontSize: "24pt",
+          color: "blue",
+          border: to([o, color], (o, c) => `${o * 10}px solid ${c}`),
+          ...tests,
+        }}
+        onMouseEnter={(e) => setTest({ from: { x: 500 } })}
+      >
+        Hello Test Spring
       </animated.div>
     </>
   );

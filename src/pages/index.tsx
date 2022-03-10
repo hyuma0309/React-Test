@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Top from '../components/Top';
-import Spring from '../components/reactSpring/Spring';
 
 
 const MyApp: React.FC = () => {
@@ -10,7 +9,6 @@ const MyApp: React.FC = () => {
       <Top text="下記くけこ">
         children
       </Top>
-      <Spring />
     </div>
   );
 }
