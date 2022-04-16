@@ -1,5 +1,10 @@
 import React, { useRef, useState, VFC } from "react";
 
+// hooksでまとめるとこれらを使いたいファイルごとに呼ばなくて済む
+// import { useSelector, useDispatch } from "react-redux";
+// import { decrease, increase } from "../store/count/counterSlice";
+import { useStore } from "../hooks/useStore";
+
 export interface TopProps {
   text?: string;
   children?: React.ReactNode;
@@ -12,6 +17,13 @@ const doSomething = () => {
 const Top: VFC<TopProps> = (props) => {
   const [testText, setText] = useState("stateです");
   const textRef = useRef(null);
+
+  // redux toolkit
+  // const count = useSelector((state) => state.counter.count);
+  // const dispatch = useDispatch();
+
+  //hooksにまとめてみた
+  const { state, dispatch, actions } = useStore();
 
   console.log("レンダリング");
 
@@ -37,6 +49,15 @@ const Top: VFC<TopProps> = (props) => {
       </div>
       {/* stateはcomputedのように使える */}
       <p>{testText}</p>
+      {/* redux toolkit */}
+      {/* <h1>Count: {count}</h1>
+      <button onClick={() => dispatch(increase())}>Up</button>
+      <button onClick={() => dispatch(decrease())}>Down</button> */}
+
+      {/* hooksにまとめてみた */}
+      <h1>Count: {state.counter.count}</h1>
+      <button onClick={() => dispatch(actions.count.increase())}>Up</button>
+      <button onClick={() => dispatch(actions.count.decrease())}>Down</button>
     </>
   );
 };

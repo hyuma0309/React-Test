@@ -1,6 +1,7 @@
-import React, { FC, useCallback, useState } from 'react';
-import Top from '../components/Top';
-
+import React, { FC, useCallback, useState } from "react";
+import Top from "../components/Top";
+import { store } from "../store/index";
+import { Provider } from "react-redux";
 
 const MyApp: React.FC = () => {
   const conf = {
@@ -15,41 +16,40 @@ const MyApp: React.FC = () => {
 
   //　まとめると
   type key = keyof typeof conf;
-  const test: key  = "en"
+  const test: key = "en";
 
   let user = {
     name: "John",
     sizes: {
       height: 182,
-      width: 50
-    }
+      width: 50,
+    },
   };
 
   let aiueo = user;
   let clone = Object.assign({}, user);
-  aiueo.name = "aiueo入りました"
-  user.name = "user入りました"
+  aiueo.name = "aiueo入りました";
+  user.name = "user入りました";
   // ネストした値は同期されてしまう
   // user.sizes.width = 100
 
-  let deepClone = JSON.parse(JSON.stringify(user))
-  user.sizes.width = 100
-  console.log("aiueo", aiueo.name)
-  console.log("user", user.sizes)
-  console.log("cloneName", clone.name)
-  console.log("cloneSize", clone.sizes)
+  let deepClone = JSON.parse(JSON.stringify(user));
+  user.sizes.width = 100;
+  console.log("aiueo", aiueo.name);
+  console.log("user", user.sizes);
+  console.log("cloneName", clone.name);
+  console.log("cloneSize", clone.sizes);
 
-  console.log("deepCloneSize", deepClone.sizes)
-
+  console.log("deepCloneSize", deepClone.sizes);
 
   return (
-    <div>
-      <h1>おやです</h1>
-      <Top text="下記くけこ">
-        testChildren
-      </Top>
-    </div>
+    <Provider store={store}>
+      <div>
+        <h1>おやです</h1>
+        <Top text="下記くけこ">testChildren</Top>
+      </div>
+    </Provider>
   );
-}
+};
 
 export default MyApp;
