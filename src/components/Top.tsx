@@ -1,4 +1,6 @@
 import React, { useRef, useState, VFC } from "react";
+import optimized from "/Users/asadahyuuma/code/React-Test/dist/optimized_sample1.jpg";
+
 
 // hooksでまとめるとこれらを使いたいファイルごとに呼ばなくて済む
 // import { useSelector, useDispatch } from "react-redux";
@@ -58,6 +60,15 @@ const Top: VFC<TopProps> = (props) => {
       <h1>Count: {state.counter.count}</h1>
       <button onClick={() => dispatch(actions.count.increase())}>Up</button>
       <button onClick={() => dispatch(actions.count.decrease())}>Down</button>
+
+      {/* 画像 */}
+      <div>
+        <img src="images/sample1.jpg" />
+      </div>
+      {/* 圧縮画像 */}
+      <div>
+        <img src={optimized.src} />
+      </div>
     </>
   );
 };
