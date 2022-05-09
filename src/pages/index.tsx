@@ -2,6 +2,7 @@ import React, { FC, useCallback, useState } from "react";
 import Top from "../components/Top";
 import { store } from "../store/index";
 import { Provider } from "react-redux";
+import { useRequireLogin } from "../hooks/useRequireLogin"
 
 const MyApp: React.FC = () => {
   const conf = {
@@ -41,6 +42,8 @@ const MyApp: React.FC = () => {
   console.log("cloneSize", clone.sizes);
 
   console.log("deepCloneSize", deepClone.sizes);
+
+  // useRequireLogin();
 
   return (
     <Provider store={store}>
